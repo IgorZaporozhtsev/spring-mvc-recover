@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+
+    <title>CRUDSpringBoot</title>
+
+    <meta charset="UTF-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"/>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <!--TODO почему не работает без этих скриптов-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <script src="http://yastatic.net/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+
+<div th:each="account:${accounts}">
+    <div>
+        <span th:text="${account.id}"></span>
+        <span th:text="${account.email}"></span>
+        <span th:text="${account.first_name}"></span>
+        <span th:text="${account.password}"></span>
+        <span th:text="${account.nickname}"></span>
+    </div>
+</div>
+
+<div th:fragment="content">
+    <form action="#" th:action="@{/add}" th:object="${account}" method="post">
+
+        <label for="id">id</label>
+        <input id="id" type="text" th:field="*{id}"/>
+
+        <label for="email">email</label>
+        <input id="email" type="text" th:field="*{email}"/>
+
+        <label for="first_name">first_name</label>
+        <input id="first_name" type="text" th:field="*{first_name}"/>
+
+        <label for="password">password</label>
+        <input id="password" type="text" th:field="*{password}"/>
+
+        <label for="nickname">nickname</label>
+        <input id="nickname" type="text" th:field="*{nickname}"/>
+
+        <input type="submit" value="Add Account">
+
+    </form>
+</div>
+
+
+</body>
+</html>
