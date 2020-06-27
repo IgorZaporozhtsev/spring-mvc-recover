@@ -11,7 +11,6 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
@@ -41,27 +40,6 @@ public class JpaConfig {
         dataSource.setUser(user);
         dataSource.setPassword(password);
         return dataSource;
-    }
-
-    @Bean
-    @Profile("prod")
-    public DataSource pooledDataSource(HikariConfig config) {
-        return new HikariDataSource(config);
-    }
-
-    @Bean
-    @Profile("prod")
-    public HikariConfig hikariConfig() {
-        HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setJdbcUrl(url);
-        hikariConfig.setUsername(user);
-        hikariConfig.setPassword(password);
-        hikariConfig.setDriverClassName(driverClassName);
-        hikariConfig.setMaximumPoolSize(maxPoolSize);
-        hikariConfig.setPoolName("springHikariCP");
-        hikariConfig.setConnectionTestQuery("SELECT 1");
-
-        return hikariConfig;
     }
 
     @Bean
