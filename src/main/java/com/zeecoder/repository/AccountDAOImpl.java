@@ -1,10 +1,8 @@
 package com.zeecoder.repository;
 
 import com.zeecoder.model.Account;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -17,13 +15,12 @@ public class AccountDAOImpl implements AccountDAO {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @SuppressWarnings("unchecked")
     public List<Account> getAll(){
         return entityManager.createQuery("select a from Account a", Account.class).getResultList();
     }
 
     public void add(Account account) {
-        entityManager.merge(account);
+        entityManager.persist(account);
     }
 
     public Account getOne(Long id) {
@@ -31,7 +28,7 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     public void update(Account account) {
-        entityManager.merge(account);
+        entityManager.unwrap(Session.class).update(account);
     }
 
     public void delete(Long id) {

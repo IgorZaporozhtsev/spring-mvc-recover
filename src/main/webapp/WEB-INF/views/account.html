@@ -29,38 +29,20 @@
                         <td th:text="${account.nickname}"></td>
                         <td th:text="${account.email}"></td>
                         <td th:text="${account.password}"></td>
-                        <td><a th:href="@{account/edit/{id}(id=${account.id})}">edit</a></td>
-                        <td><a th:href="@{account/delete/{id}(id=${account.id})}">delete</a></td>
+                        <td><a type="submit" class="btn btn-primary" th:href="@{/account/edit/{id}(id=${account.id})}">Edit</a></td>
+                        <td><a type="submit" class="btn btn-primary" th:href="@{/account/delete/{id}(id=${account.id})}">Delete</a></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div class='col-3 col-sm-5 col-md-12 col-lg-4'>
-            <form action="#" th:action="@{/add}" th:object="${account}" method="post">
-                <div class="form-group">
-                    <label for="id">id</label>
-                    <input id="id"  class="form-control" type="id" name="id" th:value="${id}">
-                </div>
-                <div class="form-group">
-                    <label for="email">email</label>
-                    <input id="email" class="form-control" type="email" name="email" th:value="${email}">
-                </div>
-                <div class="form-group">
-                    <label for="first_name">first_name</label>
-                    <input id="first_name" class="form-control" type="text" name="first_name" th:value="${first_name}">
-                </div>
-                <div class="form-group">
-                    <label for="password">password</label>
-                    <input id="password" class="form-control" type="password" name="password" th:value="${password}">
-                </div>
-                <div class="form-group">
-                    <label for="nickname">nickname</label>
-                    <input id="nickname" class="form-control" type="text" name="nickname" th:value="${nickname}">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+        <div class="btn-group">
+        <a type="submit" class="btn btn-primary" th:href="@{/account/add}">
+            <i class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></i> New
+        </a>
+        <a href="/account" class="btn btn-default">Cancel</a>
         </div>
 </div>
+
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
                 integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
                 crossorigin="anonymous"></script>
@@ -70,5 +52,5 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
                 integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
                 crossorigin="anonymous"></script>
-    </body>
+</body>
 </html>
