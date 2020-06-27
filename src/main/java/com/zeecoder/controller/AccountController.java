@@ -1,11 +1,10 @@
 package com.zeecoder.controller;
 
 import com.zeecoder.model.Account;
-import com.zeecoder.repository.AccountDAOImpl;
+import com.zeecoder.repository.AccountDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +17,7 @@ import java.util.List;
 public class AccountController {
 
     @Autowired
-    AccountDAOImpl accountDAO;
+    AccountDAO accountDAO;
 
     @RequestMapping(value = "/account", method = RequestMethod.GET)
     public String getAll(Model model) {

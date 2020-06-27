@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class AccountDAOImpl {
+public class AccountDAOImpl implements AccountDAO {
 
     @PersistenceContext
     private EntityManager entityManager;
