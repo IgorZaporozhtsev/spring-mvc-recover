@@ -1,63 +1,95 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="eng">
 <head>
-
-    <title>CRUDSpringBoot</title>
-
-    <meta charset="UTF-8"></meta>
-    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"/>
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-    <!--TODO почему не работает без этих скриптов-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
-    <script src="http://yastatic.net/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body>
+<div class="container">
+        <div class="table-responsive-sm">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">firs name</th>
+                        <th scope="col">nickname</th>
+                        <th scope="col">email</th>
+                        <th scope="col">password</th>
+                        <th scope="col">edit</th>
+                        <th scope="col">delete</th>
+                   </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="account:${accounts}">
+                        <td th:text="${account.id}"></td>
+                        <td th:text="${account.first_name}"></td>
+                        <td th:text="${account.nickname}"></td>
+                        <td th:text="${account.email}"></td>
+                        <td th:text="${account.password}"></td>
+                        <td><a th:href="@{account/edit/{id}(id=${account.id})}">edit</a></td>
+                        <td><a th:href="@{account/delete/{id}(id=${account.id})}">delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class='col-3 col-sm-5 col-md-12 col-lg-4'>
+            <form action="#" th:action="@{/add}" th:object="${account}" method="post">
+                <div class="form-group">
+                    <label for="id">id</label>
+                    <input id="id"  class="form-control" type="id" name="id" th:value="${id}">
+                </div>
+                <div class="form-group">
+                    <label for="email">email</label>
+                    <input id="email" class="form-control" type="email" name="email" th:value="${email}">
+                </div>
+                <div class="form-group">
+                    <label for="first_name">first_name</label>
+                    <input id="first_name" class="form-control" type="text" name="first_name" th:value="${first_name}">
+                </div>
+                <div class="form-group">
+                    <label for="password">password</label>
+                    <input id="password" class="form-control" type="password" name="password" th:value="${password}">
+                </div>
+                <div class="form-group">
+                    <label for="nickname">nickname</label>
+                    <input id="nickname" class="form-control" type="text" name="nickname" th:value="${nickname}">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <!--<div>
+            <form action="#" th:action="@{/add}" th:object="${account}" method="post">
 
+                    <label for="id">id</label>
+                    <input id="id" type="id" name="id" th:value="${id}"></br>
 
-<div th:each="account:${accounts}">
-    <div>
-        <span th:text="${account.id}"></span>
-        <span th:text="${account.email}"></span>
-        <span th:text="${account.first_name}"></span>
-        <span th:text="${account.password}"></span>
-        <span th:text="${account.nickname}"></span>
-    </div>
+                    <label for="email">email</label>
+                    <input id="email" type="email" name="email" th:value="${email}"></br>
+
+                    <label for="first_name">first_name</label>
+                    <input id="first_name" type="text" name="first_name" th:value="${first_name}"></br>
+
+                    <label for="password">password</label>
+                    <input id="password" type="password" name="password" th:value="${password}"></br>
+
+                    <label for="nickname">nickname</label>
+                    <input id="nickname" type="text" name="nickname" th:value="${nickname}"></br>
+
+                    <input type="submit" value="Add Account">
+            </form>
+        </div>-->
 </div>
-
-<div th:fragment="content">
-    <form action="#" th:action="@{/add}" th:object="${account}" method="post">
-
-        <label for="id">id</label>
-        <input id="id" type="text" th:field="*{id}"/>
-
-        <label for="email">email</label>
-        <input id="email" type="text" th:field="*{email}"/>
-
-        <label for="first_name">first_name</label>
-        <input id="first_name" type="text" th:field="*{first_name}"/>
-
-        <label for="password">password</label>
-        <input id="password" type="text" th:field="*{password}"/>
-
-        <label for="nickname">nickname</label>
-        <input id="nickname" type="text" th:field="*{nickname}"/>
-
-        <input type="submit" value="Add Account">
-
-    </form>
-</div>
-
-
-</body>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+                integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+                crossorigin="anonymous"></script>
+    </body>
 </html>

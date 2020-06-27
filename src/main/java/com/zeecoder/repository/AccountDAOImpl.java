@@ -1,6 +1,8 @@
 package com.zeecoder.repository;
 
 import com.zeecoder.model.Account;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -21,7 +23,7 @@ public class AccountDAOImpl {
     }
 
     public void add(Account account) {
-        entityManager.persist(account);
+        entityManager.merge(account);
     }
 
     public Account getOne(Long id) {
@@ -29,11 +31,11 @@ public class AccountDAOImpl {
     }
 
     public void update(Account account) {
-        Account derived = getOne(account.getId());
-        entityManager.persist(derived);
+        entityManager.merge(account);
     }
 
     public void delete(Long id) {
-        entityManager.remove(id);
+        Account derivedAccount = entityManager.getReference(Account.class, id);
+        entityManager.remove(derivedAccount);
     }
 }

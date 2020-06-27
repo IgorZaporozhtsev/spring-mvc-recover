@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
-import java.util.Objects;
 
 
 @Controller
@@ -18,32 +20,38 @@ public class AccountController {
     @Autowired
     AccountDAOImpl accountDAO;
 
-    @GetMapping("/account")
+    @RequestMapping(value = "/account", method = RequestMethod.GET)
     public String getAll(Model model) {
         List<Account> accounts = accountDAO.getAll();
         model.addAttribute("accounts", accounts);
         return "account";
     }
 
-    @PostMapping("/add")
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addAccount(@ModelAttribute("account") Account account)  {
         accountDAO.add(account);
         return "redirect:/account";
     }
 
-    @GetMapping
-    public Account getOne(Long id){
-        return accountDAO.getOne(id);
+
+    @RequestMapping(value = "account/edit/{id}", method = RequestMethod.GET)
+    public String showUpdateForm(@PathVariable("id") long id, Model model) {
+        Account student = accountDAO.getOne(id);
+        model.addAttribute("account", student);
+        return "update-account";
     }
 
-    @PutMapping("/account")
-    public void update(Account account) {
+    @RequestMapping(value = "account/update/{id}", method = RequestMethod.POST)
+    public String updateStudent(@PathVariable("id") Long id, Account account, Model model) {
         accountDAO.update(account);
+        model.addAttribute("accounts", accountDAO.getAll());
+        return "redirect:/account";
     }
 
-    @DeleteMapping("/account")
-    public void delete(Long id) {
+    @RequestMapping(value = "account/delete/{id}", method = RequestMethod.GET)
+    public String delete(@PathVariable(value = "id")  Long id) {
         accountDAO.delete(id);
+        return "redirect:/account";
     }
 
 }
