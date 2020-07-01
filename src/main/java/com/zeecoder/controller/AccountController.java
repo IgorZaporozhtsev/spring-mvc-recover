@@ -11,6 +11,7 @@ import java.util.List;
 
 
 @Controller
+@RequestMapping(value = "account")
 public class AccountController {
 
     private final AccountService service;
@@ -20,39 +21,39 @@ public class AccountController {
         this.service = service;
     }
 
-    @GetMapping("/account")
+    @GetMapping
     public String getAll(Model model) {
         List<Account> accounts = service.getAll();
         model.addAttribute("accounts", accounts);
         return "account";
     }
 
-    @GetMapping("/account/add")
+    @GetMapping("/add")
     public String showaddForm(Model model)  {
         return "add-account";
     }
 
-    @PostMapping("/account/add")
+    @PostMapping("/add")
     public String addAccount(@ModelAttribute("account") Account account)  {
         service.add(account);
         return "redirect:/account";
     }
 
-    @GetMapping("/account/edit/{id}")
+    @GetMapping("/edit/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
         Account account = service.getOne(id);
         model.addAttribute("account", account);
         return "update-account";
     }
 
-    @PostMapping("/account/update")
+    @PostMapping("/update")
     public String update(Account account, Model model) {
         service.update(account);
         model.addAttribute("accounts", service.getAll());
         return "redirect:/account";
     }
 
-    @GetMapping(value = "account/delete/{id}")
+    @GetMapping(value = "/delete/{id}")
     public String delete(@PathVariable(value = "id")  Long id) {
         service.delete(id);
         return "redirect:/account";

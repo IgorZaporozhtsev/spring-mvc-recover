@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-
 </head>
 <body>
     <div class="container">
@@ -15,23 +14,23 @@
             <form action="#" th:action="@{/account/update}" th:object="${account}" method="post">
                 <div class="form-group">
                     <label for="id">id</label>
-                    <input id="id"  th:readonly="condition" class="form-control" type="id" name="id" th:value="${id}">
+                    <input id="id" class="form-control" type="text" name="id" th:field="${account.id}">
                 </div>
                 <div class="form-group">
                     <label for="first_name">first_name</label>
-                    <input id="first_name" class="form-control" type="text" name="first_name" th:value="${first_name}">
+                    <input id="first_name" class="form-control" type="text" name="first_name" th:field="${account.first_name}">
                 </div>
                 <div class="form-group">
                     <label for="nickname">nickname</label>
-                    <input id="nickname" class="form-control" type="text" name="nickname" th:value="${nickname}">
+                    <input id="nickname" class="form-control" type="text" name="nickname" th:field="${account.nickname}">
                 </div>
                 <div class="form-group">
                     <label for="email">email</label>
-                    <input id="email" class="form-control" type="email" name="email"  th:value="${email}">
+                    <input id="email" class="form-control" type="email" name="email"  th:field="${account.email}">
                 </div>
                 <div class="form-group">
                     <label for="password">password</label>
-                    <input id="password" class="form-control" type="password" name="password" th:value="${password}">
+                    <input id="password" class="form-control" type="password" name="password" th:field="${account.password}">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
