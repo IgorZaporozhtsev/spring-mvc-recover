@@ -2,7 +2,11 @@ package com.zeecoder.repository;
 
 import com.zeecoder.model.Account;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -34,5 +38,13 @@ public class AccountDAOImpl implements AccountDAO {
     public void delete(Long id) {
         Account derivedAccount = entityManager.getReference(Account.class, id);
         entityManager.remove(derivedAccount);
+    }
+
+    @Override
+    public Account findByName(String nickname) {
+        return (Account) entityManager.createQuery("select a from Account a where a.nickname = :nickname")
+                .setParameter("nickname", nickname)
+                .getSingleResult();
+
     }
 }

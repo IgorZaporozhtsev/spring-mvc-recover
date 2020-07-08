@@ -14,4 +14,6 @@ public interface AccountDAO {
     void update(Account account);
 
     void delete(Long id);
+
+    Account findByName(String nickname);
 }

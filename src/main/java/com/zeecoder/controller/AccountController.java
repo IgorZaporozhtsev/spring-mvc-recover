@@ -28,18 +28,19 @@ public class AccountController {
         return "account";
     }
 
-    @GetMapping("/add")
-    public String showaddForm(Model model)  {
+    @GetMapping("/showAddForm")
+    public String showAddForm(Model model)  {
         return "add-account";
     }
 
     @PostMapping("/add")
     public String addAccount(@ModelAttribute("account") Account account)  {
+
         service.add(account);
         return "redirect:/account";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/showUpdateForm/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
         Account account = service.getOne(id);
         model.addAttribute("account", account);

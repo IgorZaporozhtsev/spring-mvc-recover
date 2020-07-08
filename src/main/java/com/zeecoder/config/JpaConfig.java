@@ -28,7 +28,6 @@ public class JpaConfig {
     @Value("${spring.jpa.show-sql}")
     private boolean showSql;
 
-
     @Bean
     public DataSource dataSource() {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
