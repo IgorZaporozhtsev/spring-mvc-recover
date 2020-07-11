@@ -1,10 +1,17 @@
 package com.zeecoder.security;
 
 import com.zeecoder.model.Account;
+import com.zeecoder.model.Role;
 import com.zeecoder.service.AccountService;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserDetailsServiceImpl implements org.springframework.security.core.userdetails.UserDetailsService {
@@ -18,12 +25,12 @@ public class UserDetailsServiceImpl implements org.springframework.security.core
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
 
-        Account derivedAccount = accountService.findByName(name);
+        UserDetails derivedAccount = accountService.findByName(name);
 
         if (derivedAccount == null){
             throw new UsernameNotFoundException("User '" + name + "' not found");
         }
 
-        return derivedAccount;
+        return new User(derivedAccount.getUsername(), derivedAccount.getPassword(), derivedAccount.getAuthorities());
     }
 }

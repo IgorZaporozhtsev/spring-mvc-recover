@@ -1,6 +1,7 @@
 package com.zeecoder.service;
 
 import com.zeecoder.model.Account;
+
 import java.util.List;
 
 public interface AccountService {

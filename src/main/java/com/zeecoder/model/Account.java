@@ -7,7 +7,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -18,7 +17,6 @@ import java.util.Set;
 @Entity
 @Table(name = "account")
 public class Account implements UserDetails {
-
     @Id
     @GeneratedValue
     private Long id;
@@ -30,6 +28,8 @@ public class Account implements UserDetails {
     private String password;
     @Column
     private String email;
+    @Column
+    private boolean active;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "account_role", joinColumns = @JoinColumn(name = "account_id"))
@@ -63,6 +63,6 @@ public class Account implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isActive();
     }
 }

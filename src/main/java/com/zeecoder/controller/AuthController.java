@@ -1,7 +1,5 @@
 package com.zeecoder.controller;
 
-import com.zeecoder.service.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,21 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class AuthController {
 
-    private final AccountService service;
-
-    @Autowired
-    public AuthController(AccountService service) {
-        this.service = service;
-    }
-
-    @GetMapping("/")
-    public String singIn(Model model){
+    @GetMapping
+    public String greeting(Model model){
         return "/auth/login";
     }
 
-    @PostMapping("/sign_in")
-    public String singIn(){
-        return "redirect:/account";
+    @PostMapping
+    public String error(){
+        return "/auth/login";
     }
 
     @GetMapping("/registration")
