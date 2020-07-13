@@ -35,7 +35,6 @@
       <version>5.0.7.RELEASE</version>
     </dependency>
 
-    <!-- security -->
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-web</artifactId>
@@ -47,14 +46,6 @@
       <artifactId>spring-security-config</artifactId>
       <version>5.0.7.RELEASE</version>
     </dependency>
-
-    <dependency>
-      <groupId>org.springframework.security</groupId>
-      <artifactId>spring-security-taglibs</artifactId>
-      <version>5.0.7.RELEASE</version>
-    </dependency>
-
-
 
     <dependency>
       <groupId>javax.servlet</groupId>

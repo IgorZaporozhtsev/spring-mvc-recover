@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping(value = "account")
+@RequestMapping(value = "/account")
 public class AccountController {
 
     private final AccountService service;
@@ -37,7 +37,6 @@ public class AccountController {
 
     @PostMapping("/add")
     public String addAccount(@ModelAttribute("account") Account account)  {
-
         service.add(account);
         return "redirect:/account";
     }
