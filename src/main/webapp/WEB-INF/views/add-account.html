@@ -10,6 +10,7 @@
 <body>
 <div class="container">
     <div class='col-3 col-sm-5 col-md-12 col-lg-4'>
+
         <form action="#" th:action="@{/account/add}" th:object="${account}" method="post">
             <div class="form-group">
                 <label for="id">id</label>
@@ -31,7 +32,36 @@
                 <label for="password">password</label>
                 <input id="password" class="form-control" type="password" name="password" th:value="${password}">
             </div>
-            <button type="submit" class="btn btn-primary">Create</button>
+           <div class="form-group">
+            <!-- 2st approach -->
+           <ul>
+               <li th:each="role: ${roles}">
+                   <input type="checkbox" th:field="${account.roles}" th:value="${role}" />
+                   <label th:text="${role}"></label>
+               </li>
+           </ul>
+
+            <!-- 1st approach -->
+            <!--
+               <ul>
+                   <li th:each="role: ${ownroles}">
+                       <input type="checkbox" th:field="${account.roles}" th:value="${role}" />
+                       <label th:for="${#ids.prev('roles')}" th:text="${role}"></label>
+                   </li>
+               </ul>
+            -->
+
+            <!--
+             <label th:for="roles">Roles</label>
+                   <select th:field="${account.roles}">
+                       <option th:each="role : ${ownroles}"
+                               th:text="${role.name}"
+                               th:value="${role}">
+                       </option>
+                   </select>
+             -->
+           </div>
+           <button type="submit" class="btn btn-primary">Create</button>
         </form>
     </div>
 </div>

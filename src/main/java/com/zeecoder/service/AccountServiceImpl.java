@@ -2,14 +2,19 @@ package com.zeecoder.service;
 
 import com.zeecoder.model.Account;
 import com.zeecoder.model.Role;
+import com.zeecoder.model.RoleType;
 import com.zeecoder.repository.AccountDAO;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.PersistenceException;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -30,8 +35,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void add(Account account) {
+        Set<Role> roles = account.getRoles();
+        roles.add(Role.USER);
         account.setPassword(passwordEncoder.encode(account.getPassword()));
-        account.setRoles(Collections.singleton(Role.USER));
         accountDAO.add(account);
     }
 

@@ -31,15 +31,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .csrf().disable()
                     .authorizeRequests()
                     .antMatchers("/").permitAll()
-                    .antMatchers("/account").hasAuthority("ADMIN")
-                    .antMatchers("/user_page/**").hasAnyAuthority("USER", "ADMIN")
-                    //.antMatchers(HttpMethod.GET, "/account/**").hasAuthority("USER") //todo doesn't work
+                    //.antMatchers("/account").hasAuthority("ADMIN")
+                    //.antMatchers("/user_page/**").hasAnyAuthority("USER", "ADMIN")
                     .and()
                     .formLogin()
-                    .successHandler(successHandler)
                     .loginPage("/login")
+                    .successHandler(successHandler)
                     .failureForwardUrl("/")
-                    //.defaultSuccessUrl("/account")
                     .and()
                     .logout()
                     .logoutSuccessUrl("/");

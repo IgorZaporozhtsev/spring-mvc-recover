@@ -4,7 +4,6 @@ import com.zeecoder.model.Account;
 import com.zeecoder.model.Role;
 import com.zeecoder.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,13 +30,15 @@ public class AccountController {
     }
 
     @GetMapping("/showAddForm")
-    public String showAddForm(Model model)  {
+    public String showRoles(Model model) {
+        model.addAttribute("roles", Role.values());
+        model.addAttribute("account", new Account());
         return "add-account";
     }
 
     @PostMapping("/add")
     public String addAccount(@ModelAttribute("account") Account account)  {
-        service.add(account);
+            service.add(account);
         return "redirect:/account";
     }
 

@@ -17,4 +17,5 @@ public interface AccountService {
     void delete(Long id);
 
     Account findByName(String nickname);
+
 }

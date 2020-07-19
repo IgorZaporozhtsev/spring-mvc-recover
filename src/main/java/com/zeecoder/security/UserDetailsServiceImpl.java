@@ -1,20 +1,14 @@
 package com.zeecoder.security;
 
-import com.zeecoder.model.Account;
-import com.zeecoder.model.Role;
 import com.zeecoder.service.AccountService;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
-public class UserDetailsServiceImpl implements org.springframework.security.core.userdetails.UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final AccountService accountService;
 

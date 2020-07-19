@@ -2,6 +2,7 @@ package com.zeecoder.repository;
 
 import com.zeecoder.model.Account;
 import org.hibernate.Session;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -21,7 +22,11 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     public void add(Account account) {
-        entityManager.persist(account);
+        try {
+            entityManager.persist(account);
+        } catch (ConstraintViolationException ex){
+            System.out.println("This name is already used, please choose another one!");
+        }
     }
 
     public Account getOne(Long id) {
