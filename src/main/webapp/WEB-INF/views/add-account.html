@@ -33,33 +33,12 @@
                 <input id="password" class="form-control" type="password" name="password" th:value="${password}">
             </div>
            <div class="form-group">
-            <!-- 2st approach -->
            <ul>
                <li th:each="role: ${roles}">
                    <input type="checkbox" th:field="${account.roles}" th:value="${role}" />
                    <label th:text="${role}"></label>
                </li>
            </ul>
-
-            <!-- 1st approach -->
-            <!--
-               <ul>
-                   <li th:each="role: ${ownroles}">
-                       <input type="checkbox" th:field="${account.roles}" th:value="${role}" />
-                       <label th:for="${#ids.prev('roles')}" th:text="${role}"></label>
-                   </li>
-               </ul>
-            -->
-
-            <!--
-             <label th:for="roles">Roles</label>
-                   <select th:field="${account.roles}">
-                       <option th:each="role : ${ownroles}"
-                               th:text="${role.name}"
-                               th:value="${role}">
-                       </option>
-                   </select>
-             -->
            </div>
            <button type="submit" class="btn btn-primary">Create</button>
         </form>
