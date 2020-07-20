@@ -18,29 +18,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsServiceImpl userDetailsService;
     private final AuthSuccessHandlerImpl successHandler;
+    private final AuthFailureHandlerImpl failureHandler;
 
     @Autowired
-    public SecurityConfig(UserDetailsServiceImpl userDetailsService, AuthSuccessHandlerImpl successHandler) {
+    public SecurityConfig(UserDetailsServiceImpl userDetailsService, AuthSuccessHandlerImpl successHandler, AuthFailureHandlerImpl failureHandler) {
         this.userDetailsService = userDetailsService;
         this.successHandler = successHandler;
+        this.failureHandler = failureHandler;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                    .csrf().disable()
-                    .authorizeRequests()
-                    .antMatchers("/").permitAll()
-                    //.antMatchers("/account").hasAuthority("ADMIN")
-                    //.antMatchers("/user_page/**").hasAnyAuthority("USER", "ADMIN")
-                    .and()
-                    .formLogin()
-                    .loginPage("/login")
-                    .successHandler(successHandler)
-                    .failureForwardUrl("/")
-                    .and()
-                    .logout()
-                    .logoutSuccessUrl("/");
+                .authorizeRequests()
+                .antMatchers("/", "/login*").permitAll()
+                .antMatchers("/account/**").hasAuthority("ADMIN")
+                .antMatchers("/user_page/**").hasAnyAuthority("USER", "ADMIN")
+            .and()
+                .formLogin()
+                .loginPage("/login")
+                .successHandler(successHandler)
+                .failureHandler(failureHandler)
+            .and()
+                .logout()
+                .logoutSuccessUrl("/login")
+            .and()
+                .csrf().disable();
     }
 
     @Override

@@ -3,7 +3,9 @@ package com.zeecoder.model;
 import org.springframework.security.core.GrantedAuthority;
 
 public enum Role implements GrantedAuthority {
-    ADMIN("ADMIN"),
+    ADMIN, USER, MODERATOR;
+
+    /*ADMIN("ADMIN"),
     USER("USER");
 
     private final String role;
@@ -14,7 +16,7 @@ public enum Role implements GrantedAuthority {
 
     public String getName(){
         return role;
-    }
+    }*/
 
     @Override
     public String getAuthority() {
